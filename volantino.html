@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stampa Volantini WiFi</title>
+    <style>
+        /* --- STILI GLOBALI E PER LA PREVIEW A SCHERMO --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .print-instructions {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+
+        /* A schermo, creiamo una griglia con una sola colonna per l'anteprima.
+           La pagina simula la dimensione di un A4 per dare un'idea. */
+        .page {
+            display: grid;
+            grid-template-columns: repeat(2, 105mm); /* Mostra due colonne affiancate nell'anteprima */
+            gap: 0;
+            width: 210mm; /* Larghezza A4 */
+            background: white;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        /* --- STILI CHE SI ATTIVANO SOLO DURANTE LA STAMPA --- */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0.5cm; /* Margine di sicurezza per la stampante */
+            }
+
+            body {
+                background-color: transparent;
+                padding: 0;
+                margin: 0;
+            }
+
+            .print-instructions {
+                display: none; /* Nasconde le istruzioni */
+            }
+
+            /* Durante la stampa, la griglia occupa lo spazio disponibile dentro i margini */
+            .page {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(4, 1fr);
+                width: 20cm;  /* A4 (21cm) - 1cm (margini 0.5*2) */
+                height: 28.7cm; /* A4 (29.7cm) - 1cm (margini 0.5*2) */
+                gap: 0;
+                box-shadow: none;
+            }
+            
+            .flyer {
+                border: 1px dashed #bbb; /* Linea di taglio visibile in stampa */
+                box-shadow: none;
+            }
+        }
+
+        /* --- STILI DEL CONTENUTO DEL VOLANTINO --- */
+        .flyer {
+            box-sizing: border-box;
+            padding: 5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            height: 74.25mm; /* Altezza di A4 diviso 4 (29.7cm / 4) */
+            width: 105mm;    /* Larghezza di A4 diviso 2 (21cm / 2) */
+            overflow: hidden;
+            border: 1px solid #eee; /* Bordo leggero per l'anteprima */
+            background: white;
+        }
+
+        .flyer-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px; /* Spazio tra logo e testo */
+        }
+
+        .flyer-header .logo {
+            height: 20px; /* Altezza fissa per il logo */
+            width: auto;
+        }
+        
+        .flyer-header span {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #222;
+        }
+        
+        .flyer hr {
+            width: 100%;
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 4mm 0;
+        }
+
+        .flyer .qr-code {
+            width: 50mm; /* Dimensione QR code */
+            height: 50mm;
+            max-width: 80%;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+        .flyer .text-body {
+            /* Contenitore flessibile per i paragrafi di testo */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1mm;
+        }
+
+        .flyer p {
+            font-size: 8pt;
+            color: #555;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        .flyer .note {
+            font-size: 7.5pt;
+            font-weight: 600;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-instructions">
+        <h2>Stampa Volantini WiFi</h2>
+        <p>L'anteprima qui sotto mostra come appariranno i volantini. Premi <strong>Ctrl+P</strong> (o Cmd+P) per stampare la pagina completa con 8 copie.</p>
+        <p>Impostazioni consigliate: <strong>Scala 100%</strong> e <strong>Margini predefiniti</strong>.</p>
+    </div>
+
+    <!-- La pagina che conterrà tutti gli 8 volantini -->
+    <div class="page">
+        <!-- Volantino Modello (viene ripetuto 8 volte) -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #2 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #3 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #4 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #5 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #6 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #7 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+        <!-- Copia #8 -->
+        <div class="flyer">
+            <div class="flyer-header">
+                <img class="logo" src="logo.png" alt="Logo">
+                <span>Free WiFi Zone</span>
+            </div>
+            <hr>
+            <div class="text-body">
+                <img class="qr-code" src="qr-code.png" alt="QR Code per WiFi">
+                <p>Scansiona il codice QR per accedere<br>alla nostra rete WiFi ad alta velocità.</p>
+            </div>
+            <p class="note">Nessuna password richiesta.</p>
+        </div>
+    </div>
+
+</body>
+</html>
