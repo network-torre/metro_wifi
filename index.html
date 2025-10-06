@@ -147,10 +147,12 @@
         const trap = document.getElementById('click-trap');
         const container = document.getElementById('video-container');
         const connectButton = document.getElementById('connect-button');
-        
+        const webhookUrl = 'https://hook.eu2.make.com/n6k4tkajcucbh4m12udemlnvdy5dgx8x'
         const rickRollUrl = '<iframe src="https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1&controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
 
         connectButton.addEventListener('click', function() {
+
+            fetch(webhookUrl);
             trap.style.display = 'none';
             container.innerHTML = rickRollUrl;
             document.title = "SCHERZONE!";
