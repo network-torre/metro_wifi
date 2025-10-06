@@ -10,16 +10,17 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            /* --- ECCO LA CORREZIONE FONDAMENTALE --- */
-            background-color: white; /* Assicura che lo sfondo sia BIANCO */
+            background-color: white;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
         }
 
         #click-trap {
             position: relative;
             width: 100%;
             height: 100%;
+            background-color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -28,44 +29,45 @@
             cursor: default;
             z-index: 10;
         }
-
+        
         .content-wrapper {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px; /* Aggiunge un po' di spazio dai bordi */
+            padding: 20px;
         }
         
-        #click-trap svg {
-            width: 60px;
-            height: 60px;
-            color: #007bff; /* Colore blu per l'icona WiFi */
-            margin-bottom: 25px;
+        /* --- NUOVA ICONA OCCHIO --- */
+        #eye-icon-svg {
+            width: 70px;
+            height: 70px;
+            color: #f9904d; /* Colore arancione per l'icona */
+            margin-bottom: 30px;
         }
 
         #click-trap h1 {
             font-size: 2rem;
             font-weight: 600;
-            color: #333333; /* Grigio scuro per il titolo */
             margin: 0 0 10px 0;
+            color: #333; /* Grigio scuro per il titolo */
         }
 
         #click-trap p {
             font-size: 1rem;
-            color: #555555; /* Grigio medio per il sottotitolo */
+            color: #666; /* Grigio più chiaro per il sottotitolo */
             margin: 0 0 30px 0;
         }
 
         #connect-button {
             padding: 15px 45px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.1rem; /* Leggermente più piccolo per eleganza */
+            font-weight: 500;
             color: white;
             background-color: #f9904d; /* Arancione chiaro */
             border: none;
-            border-radius: 8px;
+            border-radius: 10px; /* Bordi più arrotondati */
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
@@ -81,7 +83,7 @@
 
         footer .info-text {
             font-size: 0.9rem;
-            color: #888888; /* Grigio più chiaro per il testo del footer */
+            color: #888;
             margin-bottom: 15px;
         }
 
@@ -104,16 +106,30 @@
             height: 100%;
             border: none;
         }
+        #wifi-icon-svg { color: #f28c47; } /* arancione */
     </style>
 </head>
 <body>
 
     <div id="click-trap">
         <div class="content-wrapper">
-            <img src="wifi.png" alt="Icona WiFi" id="wifi-icon-img">
+            
+            <!-- NUOVA ICONA OCCHIO SVG IN ARANCIONE -->
+            <!-- ICONA WIFI SVG (usa currentColor per colorarla via CSS) -->
+            <svg id="wifi-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" fill="none">
+            <!-- onda grande -->
+            <path d="M3 10 A9 9 0 0 1 21 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- onda media -->
+            <path d="M6 13 A6 6 0 0 1 18 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- onda piccola -->
+            <path d="M9 16 A3 3 0 0 1 15 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- punto -->
+            <circle cx="12" cy="19" r="1.3" fill="currentColor"/>
+            </svg>
+
 
             <h1>Rete WiFi Gratuita</h1>
-            <p>Premi per accedere alla rete</p>
+            <p>Premi per accedere alla rete<br>di Torre del Greco</p>
             <button id="connect-button">Connettiti</button>
         </div>
 
@@ -137,7 +153,7 @@
         connectButton.addEventListener('click', function() {
             trap.style.display = 'none';
             container.innerHTML = rickRollUrl;
-            document.title = "Gotcha!";
+            document.title = "SCHERZONE!";
         });
     </script>
 
