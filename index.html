@@ -10,88 +10,85 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #f4f4f4;
+            /* --- ECCO LA CORREZIONE FONDAMENTALE --- */
+            background-color: white; /* Assicura che lo sfondo sia BIANCO */
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Il "tranello" - la nostra finta schermata di login */
         #click-trap {
-            position: relative; /* Cambiato per posizionare il footer rispetto a questo elemento */
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
             height: 100%;
-            background-color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            cursor: pointer;
+            cursor: default;
             z-index: 10;
+        }
+
+        .content-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Aggiunge un po' di spazio dai bordi */
         }
         
         #click-trap svg {
-            width: 80px;
-            height: 80px;
-            color: #007bff;
-            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
+            color: #007bff; /* Colore blu per l'icona WiFi */
+            margin-bottom: 25px;
         }
 
         #click-trap h1 {
-            font-size: 1.8rem;
-            color: #333;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333333; /* Grigio scuro per il titolo */
             margin: 0 0 10px 0;
         }
 
         #click-trap p {
             font-size: 1rem;
-            color: #666;
+            color: #555555; /* Grigio medio per il sottotitolo */
             margin: 0 0 30px 0;
         }
 
-        #click-trap button {
-            padding: 15px 40px;
+        #connect-button {
+            padding: 15px 45px;
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
-            background-color: #007bff;
+            background-color: #f9904d; /* Arancione chiaro */
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
 
-        #click-trap button:hover {
-            background-color: #0056b3;
+        #connect-button:hover {
+            background-color: #da7e5e; /* Arancione scuro */
         }
-
-        /* --- NUOVA SEZIONE: Stile per il Footer --- */
+        
         footer {
-            position: absolute;
-            bottom: 20px; /* Lo posiziona in basso */
             width: 100%;
-            text-align: center;
+            padding-bottom: 30px;
         }
 
         footer .info-text {
-            font-size: 0.8rem; /* Testo più piccolo */
-            color: #999; /* Grigio chiaro per non dare troppo nell'occhio */
-            margin-bottom: 10px; /* Spazio tra testo e logo */
-        }
-        
-        footer a {
-            display: inline-block;
+            font-size: 0.9rem;
+            color: #888888; /* Grigio più chiaro per il testo del footer */
+            margin-bottom: 15px;
         }
 
         footer img {
-            max-height: 35px; /* Limita l'altezza del logo */
-            opacity: 0.7; /* Lo rende leggermente trasparente, più professionale */
+            max-height: 35px;
         }
-        /* --- FINE NUOVA SEZIONE --- */
 
-        /* Il contenitore del video */
         #video-container {
             position: absolute;
             top: 0;
@@ -111,39 +108,33 @@
 </head>
 <body>
 
-    <!-- La schermata trappola con il nuovo footer */ -->
     <div id="click-trap">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.138.48.07.668-.05zm-3.832 2.324a.485.485 0 0 0-.068-.708A8.46 8.46 0 0 0 8 6.5a8.46 8.46 0 0 0-3.484 1.231.485.485 0 0 0-.068.708.518.518 0 0 0 .684.048A7.46 7.46 0 0 1 8 7.5a7.46 7.46 0 0 1 2.832 1.082.518.518 0 0 0 .684-.048z"/>
-          <path d="M10.115 10.224a.485.485 0 0 0-.087-.684A4.47 4.47 0 0 0 8 9a4.47 4.47 0 0 0-2.028.54.485.485 0 0 0-.087.684.518.518 0 0 0 .7.04A3.47 3.47 0 0 1 8 10a3.47 3.47 0 0 1 1.415.364.518.518 0 0 0 .7-.04zM8 12.016A1.5 1.5 0 1 0 8 9a1.5 1.5 0 0 0 0 3.016z"/>
-        </svg>
+        <div class="content-wrapper">
+            <img src="wifi.png" alt="Icona WiFi" id="wifi-icon-img">
 
-        <h1>Rete WiFi Gratuita</h1>
-        <p>Premi per accedere alla rete</p>
-        <button>Connettiti</button>
+            <h1>Rete WiFi Gratuita</h1>
+            <p>Premi per accedere alla rete</p>
+            <button id="connect-button">Connettiti</button>
+        </div>
 
-        <!-- NUOVO FOOTER -->
         <footer>
             <p class="info-text">Accesso gratuito per 5 ore giornaliere</p>
             <a href="https://www.metrowimax.it/" target="_blank" rel="noopener noreferrer">
                 <img src="logo.png" alt="Logo MetroWimax">
             </a>
         </footer>
-        <!-- FINE NUOVO FOOTER -->
-
     </div>
 
-    <!-- Il video apparirà qui dopo il click -->
     <div id="video-container"></div>
 
     <script>
         const trap = document.getElementById('click-trap');
         const container = document.getElementById('video-container');
+        const connectButton = document.getElementById('connect-button');
         
-        // Questo è l'URL corretto per il video embed. Assicurati che sia quello che vuoi.
         const rickRollUrl = '<iframe src="https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1&controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
 
-        trap.addEventListener('click', function() {
+        connectButton.addEventListener('click', function() {
             trap.style.display = 'none';
             container.innerHTML = rickRollUrl;
             document.title = "Gotcha!";
