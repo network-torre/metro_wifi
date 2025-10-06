@@ -10,21 +10,21 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #f4f4f4; /* A light grey background, looks more official */
+            background-color: #f4f4f4;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* The "Trap" Overlay - our fake login screen */
+        /* Il "tranello" - la nostra finta schermata di login */
         #click-trap {
-            position: absolute;
+            position: relative; /* Cambiato per posizionare il footer rispetto a questo elemento */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: white;
             display: flex;
-            flex-direction: column; /* Stack items vertically */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -32,15 +32,13 @@
             z-index: 10;
         }
         
-        /* Style the icon */
         #click-trap svg {
             width: 80px;
             height: 80px;
-            color: #007bff; /* A nice blue color */
+            color: #007bff;
             margin-bottom: 20px;
         }
 
-        /* Style the text */
         #click-trap h1 {
             font-size: 1.8rem;
             color: #333;
@@ -53,13 +51,12 @@
             margin: 0 0 30px 0;
         }
 
-        /* The "Connettiti" button */
         #click-trap button {
             padding: 15px 40px;
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
-            background-color: #007bff; /* Same blue as the icon */
+            background-color: #007bff;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -67,10 +64,34 @@
         }
 
         #click-trap button:hover {
-            background-color: #0056b3; /* A darker blue on hover */
+            background-color: #0056b3;
         }
 
-        /* The video container */
+        /* --- NUOVA SEZIONE: Stile per il Footer --- */
+        footer {
+            position: absolute;
+            bottom: 20px; /* Lo posiziona in basso */
+            width: 100%;
+            text-align: center;
+        }
+
+        footer .info-text {
+            font-size: 0.8rem; /* Testo più piccolo */
+            color: #999; /* Grigio chiaro per non dare troppo nell'occhio */
+            margin-bottom: 10px; /* Spazio tra testo e logo */
+        }
+        
+        footer a {
+            display: inline-block;
+        }
+
+        footer img {
+            max-height: 35px; /* Limita l'altezza del logo */
+            opacity: 0.7; /* Lo rende leggermente trasparente, più professionale */
+        }
+        /* --- FINE NUOVA SEZIONE --- */
+
+        /* Il contenitore del video */
         #video-container {
             position: absolute;
             top: 0;
@@ -90,9 +111,8 @@
 </head>
 <body>
 
-    <!-- This is the Free WiFi "Trap" screen -->
+    <!-- La schermata trappola con il nuovo footer */ -->
     <div id="click-trap">
-        <!-- A simple WiFi SVG icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
           <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.138.48.07.668-.05zm-3.832 2.324a.485.485 0 0 0-.068-.708A8.46 8.46 0 0 0 8 6.5a8.46 8.46 0 0 0-3.484 1.231.485.485 0 0 0-.068.708.518.518 0 0 0 .684.048A7.46 7.46 0 0 1 8 7.5a7.46 7.46 0 0 1 2.832 1.082.518.518 0 0 0 .684-.048z"/>
           <path d="M10.115 10.224a.485.485 0 0 0-.087-.684A4.47 4.47 0 0 0 8 9a4.47 4.47 0 0 0-2.028.54.485.485 0 0 0-.087.684.518.518 0 0 0 .7.04A3.47 3.47 0 0 1 8 10a3.47 3.47 0 0 1 1.415.364.518.518 0 0 0 .7-.04zM8 12.016A1.5 1.5 0 1 0 8 9a1.5 1.5 0 0 0 0 3.016z"/>
@@ -101,27 +121,31 @@
         <h1>Rete WiFi Gratuita</h1>
         <p>Premi per accedere alla rete</p>
         <button>Connettiti</button>
+
+        <!-- NUOVO FOOTER -->
+        <footer>
+            <p class="info-text">Accesso gratuito per 5 ore giornaliere</p>
+            <a href="https://www.metrowimax.it/" target="_blank" rel="noopener noreferrer">
+                <img src="logo.png" alt="Logo MetroWimax">
+            </a>
+        </footer>
+        <!-- FINE NUOVO FOOTER -->
+
     </div>
 
-    <!-- The video will appear here after the click -->
+    <!-- Il video apparirà qui dopo il click -->
     <div id="video-container"></div>
 
     <script>
-        // Get the elements
         const trap = document.getElementById('click-trap');
         const container = document.getElementById('video-container');
-
-        // The Rick Roll YouTube Embed Link with Autoplay ON and controls hidden
+        
+        // Questo è l'URL corretto per il video embed. Assicurati che sia quello che vuoi.
         const rickRollUrl = '<iframe src="https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1&controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-        // Listen for the click on the trap
+
         trap.addEventListener('click', function() {
-            // 1. Hide the trap
             trap.style.display = 'none';
-            
-            // 2. Inject the video. The user's click allows the sound to play.
             container.innerHTML = rickRollUrl;
-            
-            // 3. Change the page title for maximum effect
             document.title = "Gotcha!";
         });
     </script>
